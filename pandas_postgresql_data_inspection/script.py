@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 def main():
     """Main function"""
     # Read the configuration file
+    print("Reading the configuration file...")
     config = configparser.ConfigParser()
     config.read('/secrets/postgresql_adventureworks.ini')
 
@@ -23,6 +24,7 @@ def main():
     password = config.get('postgresql', 'password')
 
     # Connect to the PostgreSQL database
+    print("Connecting to the PostgreSQL database...")
     conn = psycopg2.connect(
         host=host,
         port=port,
@@ -37,6 +39,7 @@ def main():
         order by 1,2"
 
     # Read the data from PostgreSQL into a Pandas DataFrame
+    print("Executing the SQL query:\n" + query)
     df = pd.read_sql(query, conn)
 
     # Write raw data to a CSV file
@@ -44,20 +47,24 @@ def main():
     df.to_csv("/outputs/output.csv", index=False)
 
     # show basic statistics of the data
-    print("\nBasic statistics of the data:")
+    print("\nBasic statistics of the data - command df.describe():")
     print(df.describe())
 
     # show column names and data types
-    print("\nColumn names and data types:")
+    print("\nColumn names and data types - command df.dtypes:")
     print(df.dtypes)
 
+    # use command info to show more information about the data
+    print("\nMore information about the data - command df.info():")
+    print(df.info())
+
     # show the first 5 biggest tables - without printing the original index
-    print("\nThe first 5 rows of the data:")
+    print("\nThe first 5 biggest tables:")
     print(df.sort_values(by=['n_live_tup','schemaname','relname'], \
         ascending=[False, True, True]).reset_index(drop=True).head(10))
 
     # show the last 5 tables by row count - without printing the original index
-    print("\nThe last 5 rows of the data:")
+    print("\nThe last 5 tables by row count:")
     print(df.sort_values(by=['n_live_tup','schemaname','relname'], \
         ascending=[False, True, True]).reset_index(drop=True).tail(10))
 
@@ -74,12 +81,14 @@ def main():
     print(result.sort_values(by='row_count', ascending=False))
 
     # Create a histogram of a column
+    print("\nCreating a histogram of a column n_live_tup...")
     plt.hist(df['n_live_tup'], bins=20)
 
     # Save the histogram as a PNG file
     plt.savefig('/outputs/histogram.png')
 
     # Close the database connection
+    print("\nClosing the database connection...")
     conn.close()
 
     print("\nAll Done!")

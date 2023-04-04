@@ -73,6 +73,24 @@ def main():
         pd.Series([3, 9], index=["A", "B"], name="Y"), pd.Series([4, 12], index=["A", "B"], name="Z")])
     print(data_frame)
 
+    #Create a sample DataFrame
+    print("\nCreate a sample DataFrame for melting")
+    data_frame = pd.DataFrame({
+        'Name': ['Alice', 'Bob', 'Charlie'],
+        'Math': [90, 75, 80],
+        'Science': [95, 80, 85],
+        'English': [92, 85, 90]
+    })
+    print("Created DataFrame:")
+    print(data_frame)
+
+    # Melt the DataFrame
+    melted_df = pd.melt(data_frame, id_vars=['Name'], var_name='Subject', value_name='Score')
+
+    # Print the melted DataFrame
+    print("\nMelted DataFrame:")
+    print(melted_df)
+
     print("\nAll Done!")
 
 # check if script is run as main program

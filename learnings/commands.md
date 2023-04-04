@@ -1,3 +1,5 @@
+# Commands
+
 Here's a summary of commonly used commands available in Python Pandas library grouped by use cases:
 
 **1. Data Input/Output:**
