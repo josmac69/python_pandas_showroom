@@ -58,6 +58,10 @@ def main():
     print("\nMore information about the data - command df.info():")
     print(df.info())
 
+    # usage of shape to show the number of rows and columns
+    print("\nNumber of rows and columns - command df.shape:")
+    print(df.shape)
+
     # show the first 5 biggest tables - without printing the original index
     print("\nThe first 5 biggest tables:")
     print(df.sort_values(by=['n_live_tup','schemaname','relname'], \

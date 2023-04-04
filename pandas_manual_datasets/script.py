@@ -91,6 +91,21 @@ def main():
     print("\nMelted DataFrame:")
     print(melted_df)
 
+    #Access a DataFrame with a boolean index
+    #In boolean indexing, we filter data with a boolean vector.
+    # dictionary of lists
+    print("\nAccess a DataFrame with a boolean index")
+    dict = {'name':["name1", "name2", "name3", "name4"],
+        'degree': ["degree1", "degree2", "degree3", "degree4"],
+        'score':[1, 2, 3, 4]}
+    print("Created dictionary:")
+    print(dict)
+
+    #Create a DataFrame
+    df = pd.DataFrame(dict, index = [True, False, True, False])
+    print("\nCreated DataFrame:")
+    print(df)
+
     print("\nAll Done!")
 
 # check if script is run as main program
