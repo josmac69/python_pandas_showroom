@@ -14,6 +14,12 @@ endif
 create-network:
 	docker network inspect pandas_showroom >/dev/null 2>&1 || docker network create pandas_showroom
 
+pylint:
+	docker run -it --rm \
+	-v "${PWD}/$(IMAGE)":/app \
+	"$(IMAGE)" \
+	pylint --rcfile=/app/.pylintrc /app
+
 # Target for building Docker image
 build-python:
 	docker build --progress=plain --no-cache -t "$(IMAGE)" ${PWD}/$(IMAGE)
@@ -23,7 +29,7 @@ run-postgresql: create-network
 	docker run -d -p $(PORT):5432 --net pandas_showroom --name postgresql $(IMAGE)
 
 run-python: create-network
-	docker run -it \
+	docker run -it -rm \
 	--net pandas_showroom \
 	-v "${PWD}/data_inputs/":"/inputs" \
 	-v "${PWD}/data_outputs/":"/outputs" \

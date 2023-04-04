@@ -5,7 +5,8 @@ FROM python:latest
 COPY requirements.txt /pip/
 
 # Install required Python dependencies
-RUN pip install --verbose -r /pip/requirements.txt
+RUN pip install --verbose -r /pip/requirements.txt \
+    && pip install --verbose pylint
 
 # Set the working directory
 WORKDIR /app
