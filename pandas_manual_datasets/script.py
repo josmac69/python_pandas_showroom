@@ -1,0 +1,81 @@
+"""Script shows manual creation of dataset"""
+import pandas as pd
+
+def main():
+    """Main function"""
+    # create a DataFrame from a dictionary
+    print("\nCreate a DataFrame from a dictionary")
+    print("""
+    command:
+    data_frame = pd.DataFrame({"A" : [1, 3, 4], "B": [5, 9, 12]})
+    """)
+    data_frame = pd.DataFrame({"A" : [1, 3, 4], "B": [5, 9, 12]})
+    print(data_frame)
+
+    # create a DataFrame from a list of lists
+    print("\nCreate a DataFrame from a list of lists")
+    print("""
+    command:
+    data_frame = pd.DataFrame([[1, 4, 5], [7, 19, 13]], columns= ["J", "K", "L"])
+    """)
+    data_frame = pd.DataFrame([[1, 4, 5], [7, 19, 13]], columns= ["J", "K", "L"])
+    print(data_frame)
+
+    # create a DataFrame from a list of dictionaries
+    print("\nCreate a DataFrame from a list of dictionaries")
+    print("""
+    command:
+    data_frame = pd.DataFrame([{"A": 1, "B": 5}, {"A": 3, "B": 9}, {"A": 4, "B": 12}])
+    """)
+    data_frame = pd.DataFrame([{"A": 1, "B": 5}, {"A": 3, "B": 9}, {"A": 4, "B": 12}])
+    print(data_frame)
+
+    # create a DataFrame from a list of tuples
+    print("\nCreate a DataFrame from a list of tuples")
+    print("""
+    command:
+    data_frame = pd.DataFrame([(1, 5), (3, 9), (4, 12)], columns= ["M", "N"])
+    """)
+    data_frame = pd.DataFrame([(1, 5), (3, 9), (4, 12)], columns= ["M", "N"])
+    print(data_frame)
+
+    # create a DataFrame from a list of Series
+    print("\nCreate a DataFrame from a list of Series")
+    print("""
+    command:
+    data_frame = pd.DataFrame([pd.Series([1, 5]), pd.Series([3, 9]), pd.Series([4, 12])])
+    """)
+    data_frame = pd.DataFrame([pd.Series([1, 5]), pd.Series([3, 9]), pd.Series([4, 12])])
+    print(data_frame)
+
+    # create a DataFrame from a list of Series with column names
+    print("\nCreate a DataFrame from a list of Series with column names")
+    print("""
+    command:
+    data_frame = pd.DataFrame(
+        [pd.Series([1, 5], name="X"),
+        pd.Series([3, 9], name="Y"),
+        pd.Series([4, 12], name="Z")])
+    """)
+    data_frame = pd.DataFrame([pd.Series([1, 5], index=["A", "B"]), \
+        pd.Series([3, 9], index=["A", "B"]), pd.Series([4, 12], index=["A", "B"])])
+    print(data_frame)
+
+    print("\nCreate a DataFrame from a list of Series with column names and index")
+    print("""
+    command:
+    data_frame = pd.DataFrame(
+        [pd.Series([1, 5], index=["A", "B"], name="X"),
+        pd.Series([3, 9], index=["A", "B"], name="Y"),
+        pd.Series([4, 12], index=["A", "B"], name="Z")])
+    """)
+    data_frame = pd.DataFrame([pd.Series([1, 5], index=["A", "B"], name="X"), \
+        pd.Series([3, 9], index=["A", "B"], name="Y"), pd.Series([4, 12], index=["A", "B"], name="Z")])
+    print(data_frame)
+
+    print("\nAll Done!")
+
+# check if script is run as main program
+if __name__ == "__main__":
+    # execute only if run as a script
+    main()
