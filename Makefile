@@ -1,4 +1,4 @@
-.PHONY: create-network build-python run-postgresql run-python stop-postgresql clean
+.PHONY: create-network build-python run-postgresql run-python stop-postgresql clean pylint
 
 PORT ?= 5432
 
@@ -29,7 +29,7 @@ run-postgresql: create-network
 	docker run -d -p $(PORT):5432 --net pandas_showroom --name postgresql $(IMAGE)
 
 run-python: create-network
-	docker run -it -rm \
+	docker run -it --rm \
 	--net pandas_showroom \
 	-v "${PWD}/data_inputs/":"/inputs" \
 	-v "${PWD}/data_outputs/":"/outputs" \
