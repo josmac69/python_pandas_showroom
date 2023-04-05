@@ -1,8 +1,19 @@
 # Show room demonstating usage of Python Pandas for data analysis
 
-I used Pandas a lot for data analysis but those scripts have been created for specific use cases for specific companies and their data so I cannot reference them. Therefore I created this "show room" demonstrating usage of pandas and related library.
+### Overview
 
-I also used this oportunity to test programming with ChatGPT, ChatSonic and Github Copilot AIs. My experiences with these tools are generally very positive but it is necessary to ask properly formulated questions and also understand the code and do proper testing.
+* I used Pandas a lot for data analysis but those scripts have been created for specific use cases for specific companies and their data so I cannot reference them. Therefore I created this "show room" demonstrating usage of pandas and related library.
+* I also used this oportunity to test programming with ChatGPT, ChatSonic and Github Copilot AIs. My experiences with these tools are generally very positive but it is necessary to ask properly formulated questions and also understand the code and do proper testing.
+
+### Environment
+
+* All databases and python examples run in docker containers.
+* All operations are done using `make` command
+  * build image with required python libraries
+  * code linting using pylint
+  * run python image
+  * run databases
+  * stop and remove all containers
 
 ### Data sources
 
@@ -21,11 +32,6 @@ For this show room I use different data sources:
 
 * [Pandas cheat sheet: Top 35 commands and operations](https://www.educative.io/blog/pandas-cheat-sheet)
 * 
-
-### Environment
-
-* All databases and python examples run in docker containers.
-
 
 ### Covered use cases
 
