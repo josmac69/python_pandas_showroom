@@ -25,7 +25,7 @@
   * login credentials into image are in the directory `secrets` in this repo - directory is mapped to the container
 * Each python container runs in terminal interactive mode and exists at the end.
 * To test changes in `script.py` you simply run image again - script is NOT included in image, directory is mapped inside the container
-* When you are done with tests you can delete created `pandas_*` image using `make delete-pandas-images` 
+* When you are done with tests you can delete created `pandas_*` image using `make delete-pandas-images`
 
 ### Data sources
 
@@ -33,6 +33,7 @@ For this show room I use different data sources:
 
 * example PostgreSQL databases from repository - https://github.com/josmac69/postgresDBSamples
 * sample data from internet:
+  * [Yahoo finance AAPL data](https://finance.yahoo.com/quote/AAPL/history?p=AAPL)
   * [NASA json data](https://data.nasa.gov/data.json)
   * [Pandas sample student DataFrame](https://www.plus2net.com/python/pandas-student.php)
   * [Kaggle datasets](https://www.kaggle.com/datasets):

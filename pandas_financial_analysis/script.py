@@ -2,13 +2,18 @@
 This script shows usage of pandas for financial analysis.
 """
 import pandas as pd
-import pandas_datareader as pdr
+#import pandas_datareader as pdr # uncomment to download data from Yahoo! Finance
 
 def main():
     """Main entry point of the app."""
     # Download stock prices from Yahoo! Finance
-    print("Downloading stock prices from Yahoo! Finance...")
-    df = pdr.get_data_yahoo('AAPL', start='2021-01-01', end='2022-01-01')
+    print("You can download stock prices from Yahoo! Finance using pandas_datareader.")
+    print("""command: df = pdr.get_data_yahoo('AAPL', start='YYYY-MM-DD', end='YYYY-MM-DD')""")
+    print("For this example running in docker container, we will use already downloaded data.")
+
+    # Read data from CSV file
+    print("\nReading data from CSV file...")
+    df = pd.read_csv('/inputs/AAPL.csv', index_col='Date', parse_dates=True)
 
     # Calculate rolling mean and standard deviation
     print("\nCalculating rolling mean and standard deviation...")
