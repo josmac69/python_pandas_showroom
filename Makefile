@@ -1,6 +1,6 @@
 ifdef_check = $(if $(IMAGE),,@echo "IMAGE variable is not set or empty"; exit 1)
 
-.PHONY: create-network build run-postgresql run-python stop-postgresql clean pylint
+.PHONY: create-network build run-postgresql run-python stop-postgresql clean pylint delete-pandas-images delete-dangling-images
 
 PORT ?= 5432
 
@@ -48,3 +48,9 @@ stop-postgresql:
 	$(call ifdef_check)
 	docker stop $(IMAGE)
 	docker rm $(IMAGE)
+
+delete-pandas-images:
+	docker images | awk '/^pandas_/ {print $$3}' | xargs -I {} docker rmi {}
+
+delete-dangling-images:
+	docker images -f "dangling=true" -q | xargs -I {} docker rmi {}

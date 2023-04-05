@@ -25,7 +25,7 @@
   * login credentials into image are in the directory `secrets` in this repo - directory is mapped to the container
 * Each python container runs in terminal interactive mode and exists at the end.
 * To test changes in `script.py` you simply run image again - script is NOT included in image, directory is mapped inside the container
-* 
+* When you are done with tests you can delete created `pandas_*` image using `make delete-pandas-images` 
 
 ### Data sources
 
