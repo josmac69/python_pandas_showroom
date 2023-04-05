@@ -15,6 +15,18 @@
   * run databases
   * stop and remove all containers
 
+### Usage
+
+* To keep all images as ephemeral as possible, each `pandas_*` directory with example code contains its own `Dockerfile` and all python related files
+* build image using `make build IMAGE=pandas_matplotlib_graphs` or other directory name
+* run image using `make build IMAGE=pandas_matplotlib_graphs` or other directory name
+* to test PostgreSQL related examples you need first to build PostgreSQL `adventureworks` image from the repository https://github.com/josmac69/postgresDBSamples
+* Then you start this image from this repository using `make run-postgresql IMAGE=adventureworks` - it will start image with proper network so python containers can address it
+  * login credentials into image are in the directory `secrets` in this repo - directory is mapped to the container
+* Each python container runs in terminal interactive mode and exists at the end.
+* To test changes in `script.py` you simply run image again - script is NOT included in image, directory is mapped inside the container
+* 
+
 ### Data sources
 
 For this show room I use different data sources:
