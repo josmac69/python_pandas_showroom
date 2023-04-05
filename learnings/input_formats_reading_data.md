@@ -1,4 +1,4 @@
-# Input formats for pandas
+# Input formats for pandas - reading data
 
 ChatSonic:
 
