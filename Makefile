@@ -1,13 +1,15 @@
 ifdef_check = $(if $(SCRIPT),,@echo "SCRIPT variable is not set or empty"; exit 1)
 
 .PHONY: create-network \
-	build \
-	run-postgresql run-python run-jupyter \
-	stop-postgresql clean pylint \
-	delete-pandas-images delete-dangling-images
+	build-pandas-image build-jupyter-image \
+	run-python run-jupyter \
+	run-postgresql stop-postgresql \
+	clean pylint \
+	delete-pandas-images delete-jupyter-images delete-dangling-images
 
 PORT ?= 5432
 PANDAS_IMAGE ?= python_pandas_showroom
+JUPYTER_IMAGE ?= jupyter_pandas_showroom
 POSTGRESQL_IMAGE ?= adventureworks
 
 # Target for stopping all running Docker containers
@@ -25,8 +27,11 @@ pylint:
 	pylint --rcfile=/app/.pylintrc /app
 
 # Target for building Docker image
-build:
-	docker build --progress=plain --no-cache -t "$(PANDAS_IMAGE)" .
+build-pandas-image:
+	docker build --progress=plain --no-cache -t "$(PANDAS_IMAGE)" -f Dockerfile.python_pandas_showroom .
+
+build-jupyter-image:
+	docker build --progress=plain --no-cache -t "$(JUPYTER_IMAGE)" -f Dockerfile.jupyter_pandas_showroom .
 
 # Target for running Docker container in the background and exposing port 5432
 run-postgresql: create-network
@@ -45,8 +50,10 @@ run-python: create-network
 run-jupyter:
 	docker run -i -t \
 	-v ${PWD}/jupyter_notebooks:/opt/notebooks \
+	-v ${PWD}/data_inputs:/inputs \
+	-v ${PWD}/data_outputs:/outputs \
 	-p 8888:8888 \
-	continuumio/miniconda3 /bin/bash \
+	"$(JUPYTER_IMAGE)" /bin/bash \
 	-c "/opt/conda/bin/conda install jupyter -y --quiet && \
 	/opt/conda/bin/jupyter notebook \
 	--notebook-dir=/opt/notebooks --ip='*' --port=8888 \
@@ -59,6 +66,9 @@ stop-postgresql:
 
 delete-pandas-image:
 	docker images | awk '/^$$(PANDAS_IMAGE)/ {print $$3}' | xargs -I {} docker rmi {}
+
+delete-jupyter-image:
+	docker images | awk '/^$$(JUPYTER_IMAGE)/ {print $$3}' | xargs -I {} docker rmi {}
 
 delete-dangling-images:
 	docker images -f "dangling=true" -q | xargs -I {} docker rmi {}
