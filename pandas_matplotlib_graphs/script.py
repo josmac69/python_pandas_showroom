@@ -4,7 +4,6 @@ This script creates graphs from the titanic dataset using matplotlib library.
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
-import xlrd
 
 def main():
     """Main entry point of the app."""
@@ -64,8 +63,10 @@ def main():
     print(survival_counts)
     colors = ['lightcoral', 'lightskyblue']
     legend_labels = ['{0} - {1} ({2:1.2f}%)'.format(i, j, k) \
-                    for i,j,k in zip(labels, survival_counts, [x/sum(survival_counts)*100 for x in survival_counts])]
-    legend_patches = [Patch(color=color, label=label) for color, label in zip(colors, legend_labels)]
+                    for i,j,k in zip(labels, survival_counts, \
+                    [x/sum(survival_counts)*100 for x in survival_counts])]
+    legend_patches = \
+        [Patch(color=color, label=label) for color, label in zip(colors, legend_labels)]
     plt.pie(survival_counts,
             labels=labels,
             colors=colors,

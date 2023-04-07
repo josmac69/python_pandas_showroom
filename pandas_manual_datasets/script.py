@@ -69,8 +69,10 @@ def main():
         pd.Series([3, 9], index=["A", "B"], name="Y"),
         pd.Series([4, 12], index=["A", "B"], name="Z")])
     """)
-    data_frame = pd.DataFrame([pd.Series([1, 5], index=["A", "B"], name="X"), \
-        pd.Series([3, 9], index=["A", "B"], name="Y"), pd.Series([4, 12], index=["A", "B"], name="Z")])
+    data_frame = \
+        pd.DataFrame([pd.Series([1, 5], index=["A", "B"], name="X"), \
+                    pd.Series([3, 9], index=["A", "B"], name="Y"), \
+                    pd.Series([4, 12], index=["A", "B"], name="Z")])
     print(data_frame)
 
     #Create a sample DataFrame
@@ -95,14 +97,15 @@ def main():
     #In boolean indexing, we filter data with a boolean vector.
     # dictionary of lists
     print("\nAccess a DataFrame with a boolean index")
-    dict = {'name':["name1", "name2", "name3", "name4"],
+    my_dict = {'name':["name1", "name2", "name3", "name4"],
         'degree': ["degree1", "degree2", "degree3", "degree4"],
         'score':[1, 2, 3, 4]}
     print("Created dictionary:")
-    print(dict)
+    print(my_dict)
 
     #Create a DataFrame
-    df = pd.DataFrame(dict, index = [True, False, True, False])
+    print("\nCreate a DataFrame from a dictionary")
+    df = pd.DataFrame(my_dict, index = [True, False, True, False])
     print("\nCreated DataFrame:")
     print(df)
 

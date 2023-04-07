@@ -1,1 +1,8 @@
-...
+pandas
+numpy
+matplotlib
+seaborn
+xlrd
+configparser
+psycopg2
+pandas_datareader

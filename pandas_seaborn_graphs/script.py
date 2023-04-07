@@ -5,7 +5,6 @@ using matplotlib and seaborn libraries.
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import xlrd
 
 def main():
     """Main entry point of the app."""
@@ -56,7 +55,10 @@ def main():
 
     # Heatmap of passenger survival rates by class and sex
     print("\nHeatmap of passenger survival rates by class and sex...")
-    survival_rates = titanic_df.pivot_table(index='pclass', columns='sex', values='survived', aggfunc='mean')
+    survival_rates = titanic_df.pivot_table(index='pclass',
+                                            columns='sex',
+                                            values='survived',
+                                            aggfunc='mean')
     sns.heatmap(survival_rates, annot=True, cmap="YlGnBu")
     plt.title('Passenger Survival Rates by Class and Sex')
     plt.xlabel('sex')

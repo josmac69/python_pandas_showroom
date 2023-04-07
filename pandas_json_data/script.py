@@ -1,7 +1,9 @@
-import pandas as pd
+"""Script shows how to load JSON data into a pandas DataFrame."""
 import json
+import pandas as pd
 
 def main():
+    """Main function."""
     print("Pandas JSON data")
     filename = '/inputs/pets_and_owners.json'
 

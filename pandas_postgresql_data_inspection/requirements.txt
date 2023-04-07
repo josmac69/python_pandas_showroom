@@ -1,4 +1,0 @@
-configparser
-pandas
-psycopg2
-matplotlib

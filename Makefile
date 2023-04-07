@@ -1,17 +1,14 @@
-ifdef_check = $(if $(IMAGE),,@echo "IMAGE variable is not set or empty"; exit 1)
+ifdef_check = $(if $(SCRIPT),,@echo "SCRIPT variable is not set or empty"; exit 1)
 
 .PHONY: create-network build run-postgresql run-python stop-postgresql clean pylint delete-pandas-images delete-dangling-images
 
 PORT ?= 5432
+PANDAS_IMAGE ?= python_pandas_showroom
+POSTGRESQL_IMAGE ?= adventureworks
 
 # Target for stopping all running Docker containers
 clean:
 	docker rm -f $$(docker ps -aq)
-
-# Check if the IMAGE variable is set
-#ifeq ($(strip $(IMAGE)),)
-#	$(error IMAGE is not set)
-#endif
 
 create-network:
 	docker network inspect pandas_showroom >/dev/null 2>&1 || docker network create pandas_showroom
@@ -19,19 +16,17 @@ create-network:
 pylint:
 	$(call ifdef_check)
 	docker run -it --rm \
-	-v "${PWD}/$(IMAGE)":/app \
-	"$(IMAGE)" \
+	-v "${PWD}/$(SCRIPT)":/app \
+	"$(PANDAS_IMAGE)" \
 	pylint --rcfile=/app/.pylintrc /app
 
 # Target for building Docker image
 build:
-	$(call ifdef_check)
-	docker build --progress=plain --no-cache -t "$(IMAGE)" ${PWD}/$(IMAGE)
+	docker build --progress=plain --no-cache -t "$(PANDAS_IMAGE)" .
 
 # Target for running Docker container in the background and exposing port 5432
 run-postgresql: create-network
-	$(call ifdef_check)
-	docker run -d -p $(PORT):5432 --net pandas_showroom --name postgresql $(IMAGE)
+	docker run -d -p $(PORT):5432 --net pandas_showroom --name postgresql $(POSTGRESQL_IMAGE)
 
 run-python: create-network
 	$(call ifdef_check)
@@ -40,17 +35,16 @@ run-python: create-network
 	-v "${PWD}/data_inputs/":"/inputs" \
 	-v "${PWD}/data_outputs/":"/outputs" \
 	-v "${PWD}/secrets":/secrets \
-	-v "${PWD}/$(IMAGE)":/app \
-	"$(IMAGE)"
+	-v "${PWD}/$(SCRIPT)":/app \
+	"$(PANDAS_IMAGE)"
 
 # Target for stopping specific Docker container and removing it
 stop-postgresql:
-	$(call ifdef_check)
-	docker stop $(IMAGE)
-	docker rm $(IMAGE)
+	docker stop $(POSTGRESQL_IMAGE)
+	docker rm $(POSTGRESQL_IMAGE)
 
-delete-pandas-images:
-	docker images | awk '/^pandas_/ {print $$3}' | xargs -I {} docker rmi {}
+delete-pandas-image:
+	docker images | awk '/^$$(PANDAS_IMAGE)/ {print $$3}' | xargs -I {} docker rmi {}
 
 delete-dangling-images:
 	docker images -f "dangling=true" -q | xargs -I {} docker rmi {}
