@@ -1,9 +1,10 @@
-# Show room demonstating usage of Python Pandas for data analysis
+# Show room demonstrating usage of Python Pandas for data analysis
 
 ### Overview
 
 * I used Pandas a lot for data analysis but those scripts have been created for specific use cases for specific companies and their data so I cannot reference them. Therefore I created this "show room" demonstrating usage of pandas and related library.
-* I also used this oportunity to test programming with ChatGPT, ChatSonic and Github Copilot AIs. My experiences with these tools are generally very positive but it is necessary to ask properly formulated questions and also understand the code and do proper testing.
+* Every example is available as python script and as Jupyter notebook.
+* I also used this opportunity to test programming with ChatGPT, ChatSonic and Github Copilot AIs. My experiences with these tools are generally very positive but it is necessary to ask properly formulated questions and also understand the code and do proper testing.
 
 ### Environment
 
@@ -19,7 +20,7 @@
 
 * All examples use one common image `python_pandas_showroom`
 * build image using `make build`
-* run exapmle script using `make run-python SCRIPT=pandas_matplotlib_graphs` or other directory name
+* run example script using `make run-python SCRIPT=pandas_matplotlib_graphs` or other directory name
   * directories with examples start with `pandas_` prefix and contain script.py file, short README and 2 files used by pylint
 * to test PostgreSQL related examples you need first to build PostgreSQL `adventureworks` image from the repository https://github.com/josmac69/postgresDBSamples
 * Start postgresql image from this pandas repository using `make run-postgresql`
@@ -41,12 +42,12 @@ For this show room I use different data sources:
   * [Kaggle datasets](https://www.kaggle.com/datasets):
     * [Titanic dataset](https://www.kaggle.com/datasets/vinicius150987/titanic3)
     * [Titanic - Machine Learning from Disaster](https://www.kaggle.com/c/titanic/data)
-  * 
+  *
 
 ### Learning resources
 
 * [Pandas cheat sheet: Top 35 commands and operations](https://www.educative.io/blog/pandas-cheat-sheet)
-* 
+*
 
 ### Covered use cases
 
