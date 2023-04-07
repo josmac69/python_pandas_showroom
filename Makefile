@@ -1,6 +1,10 @@
 ifdef_check = $(if $(SCRIPT),,@echo "SCRIPT variable is not set or empty"; exit 1)
 
-.PHONY: create-network build run-postgresql run-python stop-postgresql clean pylint delete-pandas-images delete-dangling-images
+.PHONY: create-network \
+	build \
+	run-postgresql run-python run-jupyter \
+	stop-postgresql clean pylint \
+	delete-pandas-images delete-dangling-images
 
 PORT ?= 5432
 PANDAS_IMAGE ?= python_pandas_showroom
@@ -37,6 +41,16 @@ run-python: create-network
 	-v "${PWD}/secrets":/secrets \
 	-v "${PWD}/$(SCRIPT)":/app \
 	"$(PANDAS_IMAGE)"
+
+run-jupyter:
+	docker run -i -t \
+	-v ${PWD}/jupyter_notebooks:/opt/notebooks \
+	-p 8888:8888 \
+	continuumio/miniconda3 /bin/bash \
+	-c "/opt/conda/bin/conda install jupyter -y --quiet && \
+	/opt/conda/bin/jupyter notebook \
+	--notebook-dir=/opt/notebooks --ip='*' --port=8888 \
+	--no-browser --allow-root"
 
 # Target for stopping specific Docker container and removing it
 stop-postgresql:
