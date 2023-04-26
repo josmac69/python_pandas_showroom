@@ -6,3 +6,4 @@ xlrd
 configparser
 psycopg2
 pandas_datareader
+jira

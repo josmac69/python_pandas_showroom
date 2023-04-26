@@ -5,3 +5,4 @@ seaborn
 xlrd
 configparser
 psycopg2
+jira

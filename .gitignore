@@ -1,2 +1,3 @@
 data_outputs/*
 data_inputs/DoNotCommitThese/*
+secrets/jira_credentials.ini
